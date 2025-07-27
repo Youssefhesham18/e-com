@@ -21,17 +21,18 @@ function Checkout() {
   async function checkout(vals, cartid) {
     try {
       let token = localStorage.getItem("token");
-      let { data } = await axios.post(
-        `${baseUrl}/api/v1/orders/checkout-session/${cartid}?url=http://localhost:3000`,
-        {
-          shippingAddress: vals
-        },
-        {
-          headers: {
-            token: token
-          }
-        }
-      );
+let { data } = await axios.post(
+  `${baseUrl}/api/v1/orders/checkout-session/${cartid}?url=https://e-com-iota-henna.vercel.app`,
+  {
+    shippingAddress: vals
+  },
+  {
+    headers: {
+      token: `Bearer ${token}`
+    }
+  }
+);
+
 
       if (data.status === "success") {
         window.open(data.session.url);
