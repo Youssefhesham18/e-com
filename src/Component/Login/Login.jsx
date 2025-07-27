@@ -34,26 +34,27 @@ export default function Login({saveUserData}) {
   validationSchema,
  })
 
- async function sendDataLogin(objdata) {
-  setLoading(true)
-  
-  let {data} = await axios.post(`${baseUrl}/api/v1/auth/signin`,objdata).catch((error)=>{
-    setErrmsg(error.response.data.message)
-    setLoading(false)
+async function sendDataLogin(objdata) {
+  setLoading(true);
+  setErrmsg("");
 
-  })
-  setLoading(false)
-  
-  if(data.message == 'success'){
-    //login
-    //data.user
-    localStorage.setItem("token",data.token)
+  try {
+    let { data } = await axios.post(`${baseUrl}/api/v1/auth/signin`, objdata);
 
-    saveUserData(data.user)
-    navigate('/Home')
+    if (data.message === 'success') {
+      localStorage.setItem("token", data.token);
+      saveUserData(data.user);
+      navigate('/Home');
+    }
+
+  } catch (error) {
+    const message = error.response?.data?.message || "Login failed. Please try again.";
+    setErrmsg(message);
+  } finally {
+    setLoading(false);
   }
- 
- }
+}
+
 
   return (
     <div>

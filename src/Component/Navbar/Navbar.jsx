@@ -35,7 +35,7 @@ export default function Navbar({ userData, logOut }) {
                 <NavLink className="nav-link custom-hover" to="Home">Home</NavLink>
               </li>
               <li className="nav-item">
-  <NavLink to="/Categories" className="nav-link custom-hover ">Categories</NavLink>
+                <NavLink to="/Categories" className="nav-link custom-hover">Categories</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link custom-hover" to="Products">Products</NavLink>
@@ -86,7 +86,7 @@ export default function Navbar({ userData, logOut }) {
                   <NavLink className="nav-link custom-hover" to="Login">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link custom-hover" to="/">Register</NavLink>
+                 <NavLink className="nav-link custom-hover" to="/Register">Register</NavLink>
                 </li>
               </>
             )}
