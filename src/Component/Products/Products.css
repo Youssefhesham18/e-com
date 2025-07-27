@@ -1,0 +1,17 @@
+.add-to-cart-btn {
+  transition: 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #198754;
+  color: white;
+  border-color: #198754;
+}
+
+.product-card {
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
