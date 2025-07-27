@@ -18,30 +18,29 @@ function Checkout() {
     }
   });
 
-  async function checkout(vals, cartid) {
-    try {
-      let token = localStorage.getItem("token");
+async function checkout(vals, cartid) {
+  try {
+    let token = localStorage.getItem("token");
+    console.log("Token:", token);
+    console.log("Cart ID:", cartid);
+    console.log("Form values:", vals);
 let { data } = await axios.post(
-  `${baseUrl}/api/v1/orders/checkout-session/${cartid}?url=https://e-com-iota-henna.vercel.app`,
-  {
-    shippingAddress: vals
-  },
-  {
-    headers: {
-      token: `Bearer ${token}`
-    }
-  }
+  `https://route-ecommerce.onrender.com/api/v1/orders/checkout-session/${cartid}?url=https://e-com-iota-henna.vercel.app`,
+  { shippingAddress: vals },
+  { headers: { token: localStorage.getItem("token") } }
 );
 
 
-      if (data.status === "success") {
-        window.open(data.session.url);
-      }
+    console.log("Checkout response:", data);
 
-    } catch (err) {
-      console.log("Checkout error:", err);
+    if (data.status === "success") {
+      window.open(data.session.url);
     }
+  } catch (error) {
+    console.error("Checkout error:", error.response?.data || error.message);
   }
+}
+
 
   return (
     <div className="container my-4">
