@@ -56,7 +56,15 @@ export default function App() {
       children: [
         { path: "Home", element: <ProtectRouting><Home /></ProtectRouting> },
         { path: "Login", element: <Login saveUserData={saveUserData} /> },
-        { index: true, element: <Register /> },
+        {
+  index: true,
+  element: localStorage.getItem("token") ? (
+    <Navigate to="/Home" />
+  ) : (
+    <Navigate to="/Login" />
+  ),
+},
+
         { path: "CartDetails", element: <ProtectRouting><CartDetails /></ProtectRouting> },
         { path: "Checkout/:cartid", element: <ProtectRouting><Checkout /></ProtectRouting> },
         { path: "ProductDetails/:id", element: <ProtectRouting><ProductDetails /></ProtectRouting> },
