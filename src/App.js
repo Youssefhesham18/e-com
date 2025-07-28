@@ -16,6 +16,7 @@ import ProductDetails from './Component/ProductDetails/ProductDetails';
 import { CartContextProvider } from './Component/CartDetails/CartContext';
 import CartDetails from './Component/CartDetails/CartDetails';
 import Checkout from './Component/Checkout/Checkout.jsx';
+import AllOrders from './Component/AllOrders/AllOrders';
 
 export default function App() {
   const [userData, setUserData] = useState(null);
@@ -40,12 +41,12 @@ export default function App() {
     }
   }
 
-  // ✅ أضف دالة تسجيل الخروج هنا
+
   function logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('cart');
     setUserData(null);
-    window.location.pathname = '/Login'; // إعادة توجيه يدوي
+    window.location.pathname = '/Login'; 
   }
 
   const routes = createBrowserRouter([
@@ -65,6 +66,7 @@ export default function App() {
         { path: "Products", element: <ProtectRouting><Products /></ProtectRouting> },
         { path: "ResetPassword", element: <ResetPassword /> },
         { path: "Category", element: <ProtectRouting><Category /></ProtectRouting> },
+        { path: "AllOrders", element: <ProtectRouting><AllOrders /></ProtectRouting> },
         { path: "*", element: <NotFound /> }
       ]
     }

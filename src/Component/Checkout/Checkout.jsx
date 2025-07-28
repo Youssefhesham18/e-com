@@ -1,46 +1,76 @@
-import axios from 'axios';
-import { useFormik } from 'formik';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function Checkout() {
-  let { cartid } = useParams();
-  let baseUrl = "https://route-ecommerce.onrender.com";
+  const { cartid } = useParams();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const baseUrl = "https://ecommerce.routemisr.com";
 
-  let formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       details: "",
       phone: "",
       city: ""
     },
     onSubmit: (vals) => {
-      checkout(vals, cartid);
+      // Default submit does online checkout
+      onlineOrder(cartid, vals);
+
     }
   });
 
-async function checkout(vals, cartid) {
+  // ✅ Online Payment Function
+async function onlineOrder(cartid, vals) {
   try {
-    let token = localStorage.getItem("token");
-    console.log("Token:", token);
-    console.log("Cart ID:", cartid);
-    console.log("Form values:", vals);
-let { data } = await axios.post(
-  `https://route-ecommerce.onrender.com/api/v1/orders/checkout-session/${cartid}?url=https://e-com-iota-henna.vercel.app`,
-  { shippingAddress: vals },
-  { headers: { token: localStorage.getItem("token") } }
-);
-
-
-    console.log("Checkout response:", data);
+    let { data } = await axios.post(
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartid}?url=https://e-com-iota-henna.vercel.app`,
+      { shippingAddress: vals },
+      { headers: { token: localStorage.getItem("token") } }
+    );
 
     if (data.status === "success") {
-      window.open(data.session.url);
+      window.location.href = data.session.url;
     }
   } catch (error) {
-    console.error("Checkout error:", error.response?.data || error.message);
+    console.error("Payment error:", error);
   }
 }
 
+
+  async function createCashOrder(cartId, shippingAddress) {
+    try {
+      const { data } = await axios.post(
+        `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
+        { shippingAddress },
+        {
+          headers: {
+            token
+          }
+        }
+      );
+
+      if (data.status === "success") {
+        console.log("Cash order created successfully");
+        navigate("/allorders");
+      }
+    } catch (error) {
+      console.error("Cash order error:", error.response?.data || error.message);
+    }
+  }
+
+  function handleCashOrder() {
+    const shippingAddress = formik.values;
+    formik.validateForm().then((errors) => {
+      if (Object.keys(errors).length === 0) {
+        createCashOrder(cartid, shippingAddress);
+      } else {
+        alert("Please fill all required fields");
+      }
+    });
+  }
 
   return (
     <div className="container my-4">
@@ -77,9 +107,13 @@ let { data } = await axios.post(
           />
         </div>
 
-        <div className='text-center mt-3'>
+        <div className='text-center mt-3 d-flex justify-content-center gap-3'>
           <button type='submit' className='btn btn-success px-4'>
             <i className="fa-solid fa-credit-card me-1"></i> Online Payment
+          </button>
+
+          <button type='button' className='btn btn-primary px-4' onClick={handleCashOrder}>
+            <i className="fa-solid fa-truck me-1"></i> Cash on Delivery
           </button>
         </div>
       </form>
