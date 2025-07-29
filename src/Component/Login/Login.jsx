@@ -63,26 +63,32 @@ async function sendDataLogin(objdata) {
 
 
         <div className='my-3'>
-        <label htmlFor="email">email:</label>
+        <label htmlFor="email">Email:</label>
         <input onChange={formik.handleChange} type="email" name='email' id='email' className='form-control' />
         <p className='text-danger'>{formik.errors.email}</p>
         </div>
 
-        <div className='my-3'>
-        <label htmlFor="password">password:</label>
-        <input onChange={formik.handleChange} type="password" name='password' id='password' className='form-control' />
-        <p className='text-danger'>{formik.errors.password}</p>
-        </div>
+<div className='my-3'>
+  <label htmlFor="password">Password:</label>
+  <input
+    onChange={formik.handleChange}
+    type="password"
+    name='password'
+    id='password'
+    className='form-control'
+  />
+  <p className='text-danger'>{formik.errors.password}</p>
 
+  <div className="text-end mt-1">
+    <Link
+      to="/ForgetPassword"
+      className="text-primary text-decoration-none small"
+    >
+      Forgot Password?
+    </Link>
+  </div>
+</div>
 
-
-        {errmsg !=""? <div className='alert alert-danger'>
-          {errmsg}
-        </div> : ""}
-
-
-  
-        <Link to="/ForgetPassword">ForgetPassword ?</Link>
         <br />
 
 

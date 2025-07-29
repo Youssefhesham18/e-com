@@ -11,8 +11,8 @@ export default function Layout({ userData, logOut }) {
       <Navbar userData={userData} logOut={logOut} />
       <div className="container py-3">
         <Outlet />
-        <Footer /> 
       </div>
+      <Footer /> 
     </>
   );
 }

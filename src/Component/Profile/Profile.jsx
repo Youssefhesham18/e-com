@@ -2,14 +2,17 @@ import React from 'react';
 
 export default function Profile({ userData }) {
   if (!userData) {
-    return <h2>Loading profile...</h2>;
+    return (
+      <div className="text-center py-5">
+        <h4 className="text-muted">Loading profile...</h4>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h2>Hello {userData.name || 'Guest'}</h2><br />
-      <h2>Your Email: {userData.email || 'No email available'}</h2>
+    <div className="p-4 bg-light rounded shadow-sm mt-4 text-center">
+      <h3 className="mb-3 text-success">Welcome, {userData.name || 'Guest'} 👋</h3>
+      <p><strong>Email:</strong> {userData.email || 'No email available'}</p>
     </div>
   );
 }
-

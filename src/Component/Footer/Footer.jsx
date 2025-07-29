@@ -8,8 +8,8 @@ import img6 from '../../assets/get-google-play.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-light py-5 mt-5">
-      <div className="container">
+    <footer className="bg-light py-5 mt-5 w-100">
+      <div className="container-fluid px-5">
         <h3 className="mb-2 fw-semibold">Get The FreshCart App</h3>
         <p className="text-muted mb-4">We will send you a link, open it on your phone to download the app</p>
 

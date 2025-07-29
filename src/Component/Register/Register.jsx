@@ -67,31 +67,31 @@ export default function Register() {
       <h2>Register Now:</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className='my-3'>
-        <label htmlFor="name">name:</label>
+        <label htmlFor="name">Name:</label>
         <input onChange={formik.handleChange} type="text" name='name' id='name' className='form-control' />
         <p className='text-danger'>{formik.errors.name}</p>
         </div>
 
         <div className='my-3'>
-        <label htmlFor="email">email:</label>
+        <label htmlFor="email">Email:</label>
         <input onChange={formik.handleChange} type="email" name='email' id='email' className='form-control' />
         <p className='text-danger'>{formik.errors.email}</p>
         </div>
 
         <div className='my-3'>
-        <label htmlFor="password">password:</label>
+        <label htmlFor="password">Password:</label>
         <input onChange={formik.handleChange} type="password" name='password' id='password' className='form-control' />
         <p className='text-danger'>{formik.errors.password}</p>
         </div>
 
         <div className='my-3'>
-        <label htmlFor="rePassword">rePassword:</label>
+        <label htmlFor="rePassword">RePassword:</label>
         <input onChange={formik.handleChange} type="password" name='rePassword' id='rePassword' className='form-control' />
         <p className='text-danger'>{formik.errors.rePassword}</p>
         </div>
 
         <div className='my-3'>
-        <label htmlFor="phone">phone:</label>
+        <label htmlFor="phone">Phone:</label>
         <input onChange={formik.handleChange} type="text" name='phone' id='phone' className='form-control' />
         <p className='text-danger'>{formik.errors.phone}</p>
         </div>

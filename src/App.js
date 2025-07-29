@@ -73,6 +73,7 @@ export default function App() {
         { path: "Categories", element: <ProtectRouting><AllCategories /></ProtectRouting> },
         { path: "Products", element: <ProtectRouting><Products /></ProtectRouting> },
         { path: "ResetPassword", element: <ResetPassword /> },
+        { path: "Register", element: <Register /> },
         { path: "Category", element: <ProtectRouting><Category /></ProtectRouting> },
         { path: "AllOrders", element: <ProtectRouting><AllOrders /></ProtectRouting> },
         { path: "*", element: <NotFound /> }
