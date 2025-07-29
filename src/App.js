@@ -55,13 +55,13 @@ export default function App() {
       element: <Layout userData={userData} logOut={logOut} />, 
       children: [
         { path: "Home", element: <ProtectRouting><Home /></ProtectRouting> },
-        { path: "Login", element: <Login saveUserData={saveUserData} /> },
+        { path: "login", element: <Login saveUserData={saveUserData} /> },
         {
   index: true,
   element: localStorage.getItem("token") ? (
     <Navigate to="/Home" />
   ) : (
-    <Navigate to="/Login" />
+    <Navigate to="/login" />
   ),
 },
 
